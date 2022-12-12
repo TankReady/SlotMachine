@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    table, th, td {
+      width:80%;
+      border: 1px solid black;
+      border-collapse: collapse;
+      margin: 130px;
+      text-align: center;
+    }
+    p {
+      border: 1px solid black;
+      margin: 130px
+    }
+  </style>
+</head>
+
+<body>
+ <h1 style=text-align:center; font-family:'Times New Roman';>Slot Machine con Micro:bit</h1>
+ <h2 style=text-align:center; font-family:'Times New Roman'; >Istruzioni di gioco:</h2>
+  <p>Lo scopo consiste nel far allineare su di una stessa riga i tre led che “scendono”.Il pulsante A serve a far partire la giocata, il pulsante B serve a resettare il gioco dopo una giocata e poter quindi giocare una nuova sfida.</p>
+  <table>
+    <tr>
+      <th style=width:50%>Codice: La sua costruzione</th>
+      <td></td>
+    </tr>
+    <tr>
+      <td style=width:50%;height:280px;>Il primo passo è capire cosa vogliamo ottenere visivamente sul pannello led del microbit, ovvero una luce che percorre una colonna dall’alto verso il basso.
+In questo caso la colonna usata è quella più a sinistra, corrispondente alla variabile spaziale x sempre a 0; ponendo una coppia plot-unplot, un ciclo for che mi copra le 5 posizioni interessate ed una pausa che mi regola la velocità del movimento, ottengo ciò che ci eravamo prefissi. All’interno di un forever vado a ripetere all’infinito questo ciclo.
+Per le altre due colonne (x=2 e x=4), ripeto lo stesso procedimento poiché tutti i cicli forever di uno stesso programma vengono processati tutti assieme.
+</td>
+      <td><img src="codice1.png"></td>
+    </tr>
+    <tr>
+    <td style=width:50% ;height:300px;><img src="codice2.png"></td> 
+     <td>Proviamo a far correre un programmino così fatto, vedremo subito che i tre puntini luminosi percorrono paralleli il nostro pannello. Ci accorgiamo da subito che se volessimo sfalsarli, basterebbe porre delle pause di valore diverso, anche di poco. Potremmo dare a ciascuna pausa un nome proprio e dichiararlo all’inizio, indentando time1,time2 e time3 nel OnStart. Per quanto riguarda il valore (ms), non volendo sembrare troppo arbitrari, abbiamo lasciato al caso la questione, sfruttando gli operatori matematici opportuni.<br><a href="https://makecode.microbit.org/_2haMcrif7Yp4" target="iframe_a">https://makecode.microbit.org/_2haMcrif7Yp4</a></br></td>
+    </tr>
+    <tr>
+     <td style=height:900px; colspan="2"><iframe src="demo_iframe.htm" name="iframe_a" height="900px" width="100%" title="Iframe Example"></iframe></td> 
+    </tr>
+    <tr>
+      <td style=height:70px;><img src="codice3.png"></td>
+      <td><img src="codice4.png"></td>
+    </tr>
+    <tr>
+      <td style=height:50px; colspan="2">L’operatore moltiplicatore lo usiamo per dare coerenza e praticità alla nostra scelta, potendo settare dei valori casuali con passi non più unitari, che potrebbero risultare troppo poco staccati gli uni dagli altri. Ora proviamo a far correre questo, una bella differenza no?<a href="https://makecode.microbit.org/_FvbYXFPd30pt" target="iframe_b">https://makecode.microbit.org/_FvbYXFPd30pt</a></td>
+      <tr>
+        <td style=height:900px; colspan="2"><iframe src="demo_iframe.htm" name="iframe_b" height="900px" width="100%" title="Iframe Example"></iframe></td>
+      </tr>
+    </tr>
+    <tr>
+     <td style=height:280px; colspan="2"><img src="codice5.png" style="float:left;width:450px;height:230px;"><img src="codice6.png" style="float:right;width:610px;height:230px;"></td> 
+    </tr>
+    <tr>
+      <td style=width:50%;height:250px;><img src="codice7.png"></td>
+      <td rowspan="2">A questo punto emerge la necessità di far partire i nostri puntini quando lo decidiamo noi; per ogni ciclo for indentiamo un if, l’evento che lo referenzia è una variabile settata su azione reattiva, quindi useremo un pulsante del microbit, Quando settiamo l’azione, i cicli for iniziano a lavorare, per stopparli ricordiamoci di preparare un pulsante antitetico, in modo di avere il completo controllo del flusso. La variabile sarà di tipo booleano.<br><a href="https://makecode.microbit.org/_L2wDdTX6aewr" target="iframe_c">https://makecode.microbit.org/_L2wDdTX6aewr</a></br></td>
+    </tr>
+    <tr>
+      <td style=width:50%;height:260px;><img src="codice8.png"></td>
+    </tr>
+    <tr>
+     <td style=height:900px; colspan="2"><iframe src="demo_iframe.htm" name="iframe_c" height="900px" width="100%" title="Iframe Example"></iframe></td> 
+    </tr>
+    <tr>
+      <td><img src="codice9.png"></td>
+      <td style=width:50%;height:260px;>Siamo a buon punto, ora affrontiamo la prima “challenge”, ovvero far rallentare lo scorrere dei nostri puntini fino a farli fermare, altrimenti li vedremmo scorrere “da qui all’eternità”, per dirla alla James Jones. Procediamo per gradi: innanzitutto rallentiamo il puntino, prendiamo come esempio la colonna x=0, reimpostando ad ogni ciclo il tempo di pausa aggiungendogliene un pochino; time1 uguale a se stesso più un piccolo valore a random, in modo da scostarci ulteriormente da metodi deterministici e dare variabilità alle nostre funzioni.</td>
+    </tr>
+    <tr>
+      <td style=width:50%;height:250px;>Ora dobbiamo fermare il ciclo in un punto ben preciso. Chi lo decide? La risposta varia in base alla soluzione che voglio adottare e all’archetipo di struttura che ho fin qui creato. In questo caso trovo conveniente lavorare sul tempo di pausa stabilendo che oltrepassata una certa misura (ascritta in un if con operatore di confronto) la potente funzione break mi “sbatte” fuori dal ciclo. L’accortezza è di far disegnare l’ultimo puntino corrispondente alla y settata da indice e di porla ASSOLUTAMENTE prima di break, pena la perdita del puntino. L’intera funzione è indentata in un if ulteriore, con l’operazione di confronto di segno inverso,, per evitare la riscrittura del puntino nella posizione x=0;y=0. Analogo lavoro va fatto anche per i blocchi di codice relativi alle colonne x=2 e x=4, provando col simulatore MakeCode dovrebbe tornarvi tutto.<br><a href="https://makecode.microbit.org/_VEKJ7v5c1DWJ" target="iframe_d">https://makecode.microbit.org/_VEKJ7v5c1DWJ</a></br></td>
+      <td><img src="codice10.png"></td>
+    </tr>
+    <tr>
+    <td style=height:900px; colspan="2"><iframe src="demo_iframe.htm" name="iframe_d" height="900px" width="100%" title="Iframe Example"></iframe></td>  
+    </tr>
+    <tr>
+      <td style=width:50%;height:260px;>Fatto? Pronti per il rush finale?  Bene.
+Manca solo una cosa, far accorgere il mio microbit che se su una qualsiasi linea mi si fermano i miei tre puntini deve dirmi che ho vinto. La richiesta sembrerebbe alquanto semplice, ma in realtà nasconde un particolare subdolo che solo la conoscenza del modo di operare del microbit può eludere. Facilmente giungiamo a capire di mettere a confronto le coordinate spaziali dei tre puntini relative alle colonne, bene, esse coincidono con la parola indice, rappresentante un numero progressivo e reiterata più volte nei cicli for per “cadenzarne” l’incedere. E’ per tutti e tre i cicli uguale, quindi, fosse solo questo il problema, basterebbe farne tre nominali per colonna e procedere al confronto. Ma esse denotano natura di variabile SOLO all’interno del ciclo for e, quando la funzione break porta fuori, il loro valore viene sempre riportato a 0, per cui, risulterebbero sempre verificate le uguaglianze.
+</td>
+      <td rowspan="2"><img src="codice11.png"></td>
+    </tr>
+    <tr>
+      <td style=width:50%;height:260px;>Sempre presa la colonna x=0 ad esempio, facciamo una cosa molto semplice, definiamo una nuova variabile all’interno del ciclo for, chiamiamola y1, e la impostiamo di valore indicato da indice, cosicchè quando giunge l’agognato momento del break viene estrapolato il valore y senza che venga resettato. Ripetiamo specularmente sui relativi blocchi di codice restanti e procediamo al confronto.
+Il gioco è fatto e l’avete fatto voi!<br><a href="https://makecode.microbit.org/_eMqEAVPx2YF3" target="iframe_e">https://makecode.microbit.org/_eMqEAVPx2YF3</a></br>  
+</td>   
+    </tr>
+    <tr>
+    <td style=height:900px; colspan="2"><iframe src="demo_iframe.htm" name="iframe_e" height="900px" width="100%" title="Iframe Example"></iframe></td>  
+    </tr>
+  </table>
+</body>
+
+</html>
