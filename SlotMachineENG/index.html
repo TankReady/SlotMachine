@@ -28,29 +28,20 @@
     challenge.</p>
   <table>
     <tr>
-      <th style=width:50%>Code: Its construction</th>
+      <th style=width:50%>Code construction</th>
       <td></td>
     </tr>
     <tr>
-      <td style=width:50%;height:280px;>The first step is to understand what we want to achieve visually on the led panel of the
-        microbit, i.e. a light that travels down a column from top to bottom.
-        In this case the column used is the leftmost one, corresponding to the spatial variable x always at 0;
-        placing a plot-unplot pair, a for loop that covers the 5 interested positions and a pause that regulates me
-        the speed of movement, I get what we set ourselves. Inside a forever I'm going to repeat
-        this cycle forever.
-        For the other two columns (x=2 and x=4), I repeat the same process since all loops forever of the same
-        program are all processed together.
+      <td style=width:50%;height:280px;>The first step is to understand what we want to achieve visually on the microbit LED panel, i.e. a light running down from top to bottom.
+In this case, the column used is the leftmost one, which is the space variable x always set to 0. By setting a plot-unplot pair, a for loop that covers the 5 positions involved and a pause to regulate the movement speed, the desired result is achieved. Within a forever loop, that loop is repeated endlessly.
+As for the remaining two columns (x=2 and X=4),  the same procedure is repeated, since all the forever loops of the same program are processed together.
       </td>
       <td><img src="Codice1ENG.png"></td>
     </tr>
     <tr>
       <td style=width:50% ;height:300px;><a href="https://makecode.microbit.org/_2haMcrif7Yp4"><img
             src="Codice2ENG.png"></a></td>
-      <td><b>Let's try to run a little program like this,</b> we will immediately see that the three bright dots travel
-        parallel our panel. We immediately realize that if we wanted to offset them, it would be enough to pause
-        of different value, even slightly. We could give each rest a proper name and declare it at the beginning,
-        indenting time1,time2 and time3 in the OnStart. As for the value (ms), not wanting to sound like too much
-        arbitrary, we left the matter to chance, making use of the appropriate mathematical operators.<br></br></td>
+      <td><b>By running such a program,</b> it is immediately observed that the three luminous dots will run parallelly on our panel. Simply set pauses of different values in order to (even slightly) offset them. Each pause can be given a proper name, to be stated at the beginning, by indenting time1, time2 and time3 into OnStart. As for the value (ms), the matter can be randomized by using the appropriate mathematical operators:<br></br></td>
     </tr>
 
     <tr>
@@ -58,9 +49,7 @@
       <td><img src="Codice4ENG.png"></td>
     </tr>
     <tr>
-      <td style=height:50px; colspan="2">We use the multiplier operator to give coherence and practicality to ours
-        choice, being able to set random values ​​with steps that are no longer unitary, which could be too small
-        detached from each other. <b>Now let's try to run this, quite a difference isn't it?</b></td>
+      <td style=height:50px; colspan="2">The multiplier operator is used to make our choice more consistent and practical. Random values can be set with wider steps, in order to detache them from one other.<b>We can try to execute this code. It will make a difference. </b></td>
     <tr>
       <td style=width:100% ;height:300px; colspan="2"><a href="https://makecode.microbit.org/_FvbYXFPd30pt"><img src="Codice5,6ENG.png">
         </a>
@@ -72,11 +61,7 @@
     </tr>
     <tr>
       <td style=width:50%;height:250px;><img src="Codice7ENG.png"></td>
-      <td rowspan="2">At this point emerges the need to start our dots when we decide it; For
-        each for loop we indent an if, the event that references it is a variable set to reactive action, therefore
-        we will use a button of the microbit, When we set the action, the for loops start working, to stop them
-        remember to prepare an antithetical button, in order to have complete control of the flow. There
-        variable will be of type boolean.<b>Seeing is believing.</b><br></br></td>
+      <td rowspan="2">Now we need to move the dots when we want them to do it. At each for loop an if is indented. The triggering event is a variable set upon a pressing action, so a microbit button is used, When the action is set, the for loops start working. In order to stop them, an antithetical button needs to be set, so as to gain complete control over the flow. The variable will be boolean in type.<br></br></td>
     </tr>
     <tr>
       <td style=width:50%;height:260px;><a href="https://makecode.microbit.org/_L2wDdTX6aewr">
@@ -85,48 +70,26 @@
    
     <tr>
       <td><img src="Codice9ENG.png"></td>
-      <td style=width:50%;height:260px;>We are at a good point, now let's face the first "challenge", i.e. slowing down
-        the flow of our dots until they stop, otherwise we would see them flowing "from here to eternity", for
-        put it James Jones. Let's proceed step by step: first of all let's slow down the dot, let's take la as an example
-        column x=0, resetting the pause time at each cycle by adding a little; time1 equal to itself
-        plus a small random value, in order to further deviate from deterministic methods and give variability
-        to our functions.</td>
+      <td style=width:50%;height:260px;>At this point, the first "challenge" can be faced, namely slowing down the dots flow until it stops, otherwise it would last forever.Step by step procedure: slow down the dot, take column x=0 as an example, by resetting the pause time at each cycle by adding a little time; time1 equalling itself plus a small random value, in order to further deviate from deterministic methods and give variability to our functions.</td>
     </tr>
     <tr>
-      <td style=width:50%;height:250px;>Now we have to stop the cycle at a precise point. Who decides it? There
-        The answer varies according to the solution I want to adopt and the archetype of structure I have created so far. In
-        In this case I find it convenient to work on the pause time by establishing that once a certain amount has been exceeded (ascribed
-        in an if with a comparison operator) the powerful break function "kicks" me out of the loop. Foresight is
-        draw the last dot corresponding to the y set by index and place it ABSOLUTELY before break,
-        worth the loss of the dot. The whole function is indented in a further if, with the comparison operation of
-        inverse sign,, to avoid rewriting the dot in the position x=0;y=0. Similar work needs to be done too
-        for code blocks related to columns x=2 and x=4,<b>trying with the MakeCode simulator it should go back to it
-        All.</b><br>
+      <td style=width:50%;height:250px;>The loop must be stopped at a precise point.
+Who decides that? The answer varies based on the solution and framework created up to this point.
+It is good rule to work on the pause time (inscribed in an if  with a comparison operator) which terminates the loop with a break. An expedient would be to ABSOLUTELY have the last dot corresponding to y as set by index before  break. The whole function is indented within a further if, with the reversed sign comparison operation, to avoid rewriting the dot in position x=0; y=0.
+The same must also be done for the code blocks relating to columns x=2 and x=4. <b>It should be done by using the MakeCode simulator.</b><br>
           </br></td>
       <td><a href="https://makecode.microbit.org/_VEKJ7v5c1DWJ"><img src="Codice10ENG.png"></a></td>
     </tr>
     
     <tr>
-      <td style=width:50%;height:260px;>Done? Ready for the final rush? Well.
-        Only one thing is missing, to make my microbit realize that if my three stop me on any line
-        dots must tell me that I won. The request would seem quite simple, but in reality it hides a
-        sneaky detail that only knowledge of how the microbit operates can elude. We easily come to
-        understand to compare the spatial coordinates of the three dots relative to the columns, well, them
-        coincide with the index word, representing a progressive number and repeated several times in the for loops
-        "cadenza" the gait. It is the same for all three cycles, therefore, if this were the only problem, it would be enough
-        make three nominal ones per column and proceed with the comparison. But they denote the nature of variable ONLY inside
-        of the for loop and, when the break function carries out, their value is always reset to 0, so,
-        the equalities would always be verified.
+      <td style=width:50%;height:260px;>Now we are ready for the final rush. What is missing is to establish that if the dots stop on any line, Microbit will have to indicate that the player has won. Clearly, the three dots must stop on the same line. They equal the index value, which is a progressive number repeated several times in the for loops. This mode of operation is the same in the three loops. However, they are variables only inside the for loop and when  break exits the loop, their value is always reset to zero and the equalities would always be verified.
       </td>
       <td rowspan="2"><a href="https://makecode.microbit.org/_eMqEAVPx2YF3"
           ><img src="Codice11ENG.png"></a></td>
     </tr>
     <tr>
-      <td style=width:50%;height:260px;>Still taking the column x=0 for example, let's do something very simple,
-        we define a new variable inside the for loop, call it y1, and set it to the value indicated by
-        index, so that when the coveted moment of the break arrives, the value y is extrapolated without being
-        reset. Let's mirror the related remaining blocks of code and proceed to the comparison.
-        <b>The game is done and you did it!</b><br></br>
+      <td style=width:50%;height:260px;>E.g.: take column x=0: a new variable is defined inside the for loop, y1, with value set by index. When break breaks the loop, the variable y1 is returned without being reset to zero. A comparison can now be made by repeating the procedure on the other two columns.
+        <b>Enjoy the game!</b><br></br>
       </td>
     </tr>
     
